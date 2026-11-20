@@ -7,11 +7,27 @@ import 'manage_products_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_screen.dart';
 
-void main(){
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MaterialApp(
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: BillingScreen(),
+    home: StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (snapshot.hasData) {
+          return const BillingScreen();
+        }
+        return const LoginScreen();
+      },
+    ),
   ));
 }
 
