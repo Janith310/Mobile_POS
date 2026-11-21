@@ -31,12 +31,19 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      // No manual Navigator.push needed: StreamBuilder in main.dart
-      // automatically switches to BillingScreen when auth state changes.
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
+
+      if (widget.onLogin != null) {
+        // Runs your mock/fake login function during widget tests
+        await widget.onLogin!(email, password);
+      } else {
+        // Runs real Firebase authentication in your live app
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+      }
     } on FirebaseAuthException catch (e) {
       String message = 'Login failed. Please try again.';
       if (e.code == 'user-not-found' ||
