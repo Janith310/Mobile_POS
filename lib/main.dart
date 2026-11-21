@@ -314,6 +314,14 @@ class _BillingScreenState extends State<BillingScreen> {
             },
           ),
           IconButton(
+            icon:const Icon(Icons.logout),
+            tooltip: 'Sign Out',
+            onPressed:() async{
+              await FirebaseAuth.instance.signOut()
+            },
+          ),
+          
+          IconButton(
             icon: Icon(
               Icons.bluetooth_connected,
               color: _connectedMac != null ? Colors.greenAccent : Colors.grey,
