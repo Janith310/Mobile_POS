@@ -148,11 +148,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: 22,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
-                          : const Text('Sign In',
-                              style: TextStyle(fontSize: 16)),
+                          : const Text('Sign Up':'Sign In',
+                              style:const TextStyle(fontSize: 16)),
                     ),
                   ),
-                ],
+
+                  TextButton(
+                    onPressed:()=> setState()=>_isSignUp= !_isSignUp),
+                    child:Test(
+                      _isSignUp
+                        ?'Already have an account? Sign In'
+                        ?"Don't have an account? Sign Up",
+                    ),
               ),
             ),
           ),
