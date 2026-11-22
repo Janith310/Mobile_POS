@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isLoading = false;
   bool _obscurePassword = true;
+  bool _isSignUp=false;
 
   @override
   void dispose() {
@@ -37,6 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
       if (widget.onLogin != null) {
         // Runs your mock/fake login function during widget tests
         await widget.onLogin!(email, password);
+      }else if(_isSignUp){
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
       } else {
         // Runs real Firebase authentication in your live app
         await FirebaseAuth.instance.signInWithEmailAndPassword(
