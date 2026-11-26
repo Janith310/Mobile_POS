@@ -317,7 +317,7 @@ class _BillingScreenState extends State<BillingScreen> {
             icon:const Icon(Icons.logout),
             tooltip: 'Sign Out',
             onPressed:() async{
-              await FirebaseAuth.instance.signOut()
+              await FirebaseAuth.instance.signOut();
             },
           ),
           

@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+                children:[ 
                   const Icon(Icons.point_of_sale, size: 72, color: Colors.blue),
                   const SizedBox(height: 16),
                   const Text(
@@ -94,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 32),
+                
 
                   // Email Field
                   TextFormField(
@@ -157,7 +158,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed:()=> setState()=>_isSignUp= !_isSignUp),
                     child:Test(
                       _isSignUp
-                        ?'Already have an account? Sign In'
                         ?"Don't have an account? Sign Up",
                     ),
               ),
